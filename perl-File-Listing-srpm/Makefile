@@ -1,1 +1,1 @@
-../Makefile.epel
+../Makefile.lwp
