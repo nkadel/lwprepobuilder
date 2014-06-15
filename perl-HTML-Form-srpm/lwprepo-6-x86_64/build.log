@@ -1,0 +1,115 @@
+Mock Version: 1.1.38
+ENTER do(['bash', '--login', '-c', 'rpmbuild -bs --target x86_64 --nodeps builddir/build/SPECS/perl-HTML-Form.spec'], False, '/var/lib/mock/lwprepo-6-x86_64/root/', None, 0, True, False, 500, 489, None, False, {'LANG': 'C', 'TERM': 'vt100', 'SHELL': '/bin/bash', 'CCACHE_DIR': '/tmp/ccache', 'HOSTNAME': 'mock', 'PROMPT_COMMAND': 'echo -n "<mock-chroot>"', 'HOME': '/builddir', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'CCACHE_UMASK': '002'}, logger=<mockbuild.trace_decorator.getLog object at 0x15dea90>)
+Executing command: ['bash', '--login', '-c', 'rpmbuild -bs --target x86_64 --nodeps builddir/build/SPECS/perl-HTML-Form.spec'] with env {'LANG': 'C', 'TERM': 'vt100', 'SHELL': '/bin/bash', 'CCACHE_DIR': '/tmp/ccache', 'HOSTNAME': 'mock', 'PROMPT_COMMAND': 'echo -n "<mock-chroot>"', 'HOME': '/builddir', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'CCACHE_UMASK': '002'}
+Building target platforms: x86_64
+Building for target x86_64
+Wrote: /builddir/build/SRPMS/perl-HTML-Form-6.03-6.el6.src.rpm
+Child return code was: 0
+LEAVE do --> 
+
+ENTER do(['bash', '--login', '-c', 'rpmbuild -bb --target x86_64 --nodeps  builddir/build/SPECS/perl-HTML-Form.spec'], False, '/var/lib/mock/lwprepo-6-x86_64/root/', None, 0, True, False, 500, 489, None, False, {'LANG': 'C', 'TERM': 'vt100', 'SHELL': '/bin/bash', 'CCACHE_DIR': '/tmp/ccache', 'HOSTNAME': 'mock', 'PROMPT_COMMAND': 'echo -n "<mock-chroot>"', 'HOME': '/builddir', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'CCACHE_UMASK': '002'}, logger=<mockbuild.trace_decorator.getLog object at 0x15dea90>)
+Executing command: ['bash', '--login', '-c', 'rpmbuild -bb --target x86_64 --nodeps  builddir/build/SPECS/perl-HTML-Form.spec'] with env {'LANG': 'C', 'TERM': 'vt100', 'SHELL': '/bin/bash', 'CCACHE_DIR': '/tmp/ccache', 'HOSTNAME': 'mock', 'PROMPT_COMMAND': 'echo -n "<mock-chroot>"', 'HOME': '/builddir', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'CCACHE_UMASK': '002'}
+Building target platforms: x86_64
+Building for target x86_64
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.NdAlfz
++ umask 022
++ cd /builddir/build/BUILD
++ LANG=C
++ export LANG
++ unset DISPLAY
++ cd /builddir/build/BUILD
++ rm -rf HTML-Form-6.03
++ /bin/tar -xf -
++ /usr/bin/gzip -dc /builddir/build/SOURCES/HTML-Form-6.03.tar.gz
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd HTML-Form-6.03
++ /bin/chmod -Rf a+rX,u+w,g-w,o-w .
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.TJSzp2
++ umask 022
++ cd /builddir/build/BUILD
++ cd HTML-Form-6.03
++ LANG=C
++ export LANG
++ unset DISPLAY
++ /usr/bin/perl Makefile.PL INSTALLDIRS=vendor
+Checking if your kit is complete...
+Looks good
+Writing Makefile for HTML::Form
++ make
+cp lib/HTML/Form.pm blib/lib/HTML/Form.pm
+Manifying blib/man3/HTML::Form.3pm
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.FvyADx
++ exit 0
++ umask 022
++ cd /builddir/build/BUILD
++ '[' /builddir/build/BUILDROOT/perl-HTML-Form-6.03-6.el6.x86_64 '!=' / ']'
++ rm -rf /builddir/build/BUILDROOT/perl-HTML-Form-6.03-6.el6.x86_64
+++ dirname /builddir/build/BUILDROOT/perl-HTML-Form-6.03-6.el6.x86_64
++ mkdir -p /builddir/build/BUILDROOT
++ mkdir /builddir/build/BUILDROOT/perl-HTML-Form-6.03-6.el6.x86_64
++ cd HTML-Form-6.03
++ LANG=C
++ export LANG
++ unset DISPLAY
++ make pure_install PERL_INSTALL_ROOT=/builddir/build/BUILDROOT/perl-HTML-Form-6.03-6.el6.x86_64
+Manifying blib/man3/HTML::Form.3pm
+Installing /builddir/build/BUILDROOT/perl-HTML-Form-6.03-6.el6.x86_64/usr/share/perl5/vendor_perl/HTML/Form.pm
+Installing /builddir/build/BUILDROOT/perl-HTML-Form-6.03-6.el6.x86_64/usr/share/man/man3/HTML::Form.3pm
++ find /builddir/build/BUILDROOT/perl-HTML-Form-6.03-6.el6.x86_64 -type f -name .packlist -exec rm -f '{}' ';'
++ find /builddir/build/BUILDROOT/perl-HTML-Form-6.03-6.el6.x86_64 -depth -type d -exec rmdir '{}' ';'
++ /bin/chmod -Rf a+rX,u+w,g-w,o-w /builddir/build/BUILDROOT/perl-HTML-Form-6.03-6.el6.x86_64/usr
++ /usr/lib/rpm/find-debuginfo.sh --strict-build-id /builddir/build/BUILD/HTML-Form-6.03
++ /usr/lib/rpm/check-buildroot
++ /usr/lib/rpm/redhat/brp-compress
++ /usr/lib/rpm/redhat/brp-strip-static-archive /usr/bin/strip
++ /usr/lib/rpm/redhat/brp-strip-comment-note /usr/bin/strip /usr/bin/objdump
++ /usr/lib/rpm/brp-python-bytecompile
++ /usr/lib/rpm/redhat/brp-python-hardlink
++ /usr/lib/rpm/redhat/brp-java-repack-jars
+Executing(%check): /bin/sh -e /var/tmp/rpm-tmp.KRor83
++ umask 022
++ cd /builddir/build/BUILD
++ cd HTML-Form-6.03
++ unset DISPLAY
++ make test
+PERL_DL_NONLAZY=1 /usr/bin/perl "-MExtUtils::Command::MM" "-e" "test_harness(0, 'blib/lib', 'blib/arch')" t/*.t
+t/form-label.t ......... ok
+t/form-maxlength.t ..... ok
+t/form-multi-select.t .. ok
+t/form-param.t ......... ok
+t/form-selector.t ...... ok
+t/form-unicode.t ....... ok
+t/form.t ............... ok
+All tests successful.
+Files=7, Tests=192,  1 wallclock secs ( 0.15 usr  0.05 sys +  0.71 cusr  0.18 csys =  1.09 CPU)
+Result: PASS
++ exit 0
+Processing files: perl-HTML-Form-6.03-6.el6.noarch
+Executing(%doc): /bin/sh -e /var/tmp/rpm-tmp.Uytz6C
++ umask 022
++ cd /builddir/build/BUILD
++ cd HTML-Form-6.03
++ DOCDIR=/builddir/build/BUILDROOT/perl-HTML-Form-6.03-6.el6.x86_64/usr/share/doc/perl-HTML-Form-6.03
++ export DOCDIR
++ rm -rf /builddir/build/BUILDROOT/perl-HTML-Form-6.03-6.el6.x86_64/usr/share/doc/perl-HTML-Form-6.03
++ /bin/mkdir -p /builddir/build/BUILDROOT/perl-HTML-Form-6.03-6.el6.x86_64/usr/share/doc/perl-HTML-Form-6.03
++ cp -pr Changes README /builddir/build/BUILDROOT/perl-HTML-Form-6.03-6.el6.x86_64/usr/share/doc/perl-HTML-Form-6.03
++ exit 0
+Finding  Provides: /bin/sh -c " /bin/grep -v  '/usr/lib64/perl5/vendor_perl/.*\.so$' | /bin/grep -v -P '/usr/lib64/perl5/(?!CORE/libperl).*\.so$' | /bin/grep -v  '/usr/share/doc' | while read FILE; do /usr/lib/rpm/rpmdeps -P ${FILE}; done | /bin/sort -u  | /bin/sed -e '/perl(UNIVERSAL)/d; /perl(DB)/d'"
+Finding  Requires: /bin/sh -c " /bin/grep -v  '/usr/share/doc' |  while read FILE; do /usr/lib/rpm/rpmdeps -R ${FILE}; done | /bin/sort -u "
+Provides: perl(HTML::Form) = 6.03 perl(HTML::Form::FileInput) perl(HTML::Form::IgnoreInput) perl(HTML::Form::ImageInput) perl(HTML::Form::Input) perl(HTML::Form::KeygenInput) perl(HTML::Form::ListInput) perl(HTML::Form::SubmitInput) perl(HTML::Form::TextInput)
+Requires(rpmlib): rpmlib(FileDigests) <= 4.6.0-1 rpmlib(PayloadFilesHavePrefix) <= 4.0-1 rpmlib(CompressedFileNames) <= 3.0.4-1 rpmlib(VersionedDependencies) <= 3.0.3-1 rpmlib(VersionedDependencies) <= 3.0.3-1
+Requires: perl(Carp) perl(Encode) perl(URI) perl(strict) perl(vars) rpmlib(VersionedDependencies) <= 3.0.3-1
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /builddir/build/BUILDROOT/perl-HTML-Form-6.03-6.el6.x86_64
+Wrote: /builddir/build/RPMS/perl-HTML-Form-6.03-6.el6.noarch.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.VZ4xEM
++ umask 022
++ cd /builddir/build/BUILD
++ cd HTML-Form-6.03
++ /bin/rm -rf /builddir/build/BUILDROOT/perl-HTML-Form-6.03-6.el6.x86_64
++ exit 0
+Child return code was: 0
+LEAVE do --> 
+

@@ -1,0 +1,24 @@
+2014-06-15 12:58:54,067 - Mock Version: 1.1.38
+2014-06-15 12:58:54,074 - Start: unpacking root cache
+2014-06-15 12:59:07,234 - Finish: unpacking root cache
+2014-06-15 12:59:07,236 - Start: cleaning yum metadata
+2014-06-15 12:59:07,249 - Finish: cleaning yum metadata
+2014-06-15 12:59:07,547 - Start: device setup
+2014-06-15 12:59:07,579 - Finish: device setup
+2014-06-15 12:59:07,584 - Start: yum update
+2014-06-15 12:59:12,831 - Finish: yum update
+2014-06-15 12:59:13,294 - Finish: lock buildroot
+2014-06-15 12:59:13,295 - Finish: chroot init
+2014-06-15 12:59:13,589 - Start: build phase for lwprepo-6-x86_64.src.rpm
+2014-06-15 12:59:13,590 - Start: device setup
+2014-06-15 12:59:13,602 - Finish: device setup
+2014-06-15 12:59:13,752 - Start: build setup for lwprepo-6-x86_64.src.rpm
+2014-06-15 12:59:38,585 - Finish: build setup for lwprepo-6-x86_64.src.rpm
+2014-06-15 12:59:38,586 - Start: rpmbuild -bb lwprepo-6-x86_64.src.rpm
+2014-06-15 12:59:42,269 - Finish: rpmbuild -bb lwprepo-6-x86_64.src.rpm
+2014-06-15 12:59:42,412 - Finish: build phase for lwprepo-6-x86_64.src.rpm
+2014-06-15 12:59:42,417 - Start: lock buildroot
+2014-06-15 12:59:42,419 - Start: clean chroot
+2014-06-15 12:59:44,151 - Finish: clean chroot
+2014-06-15 12:59:44,152 - Finish: lock buildroot
+2014-06-15 12:59:44,153 - Finish: run
