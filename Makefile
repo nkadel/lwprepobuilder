@@ -13,20 +13,24 @@ REPOBASESUBDIRS+=$(REPOBASEDIR)/lwprepo/6/x86_64
 # These build with normal mock "epel-*" setups
 EPELPKGS+=perl-Data-Dump-srpm
 EPELPKGS+=perl-Encode-Locale-srpm
-EPELPKGS+=perl-File-Listing-srpm
-EPELPKGS+=perl-HTTP-Cookies-srpm
-EPELPKGS+=perl-HTTP-Daemon-srpm
-EPELPKGS+=perl-HTTP-Date-srpm
-EPELPKGS+=perl-HTTP-Message-srpm
-EPELPKGS+=perl-HTTP-Negotiatiate-srpm
 EPELPKGS+=perl-IO-HTML-srpm
 EPELPKGS+=perl-LWP-MediaTypes-srpm
-EPELPKGS+=perl-Net-HTTP-srpm
+EPELPKGS+=perl-Net-SSLeay-srpm
 EPELPKGS+=perl-WWW-RobotRules-srpm
 
 
 # Require customized lwprepo local repository for dependencies
 # Needed by various packages
+
+# Provides perl(HTTP::Headers) and varous submodules
+LWPPKGS+=perl-HTTP-Message-srpm
+
+LWPPKGS+=perl-File-Listing-srpm
+LWPPKGS+=perl-HTTP-Cookies-srpm
+LWPPKGS+=perl-HTTP-Daemon-srpm
+LWPPKGS+=perl-HTTP-Date-srpm
+LWPPKGS+=perl-HTTP-Negotiatiate-srpm
+LWPPKGS+=perl-Net-HTTP-srpm
 
 
 # Binary target
@@ -77,6 +81,29 @@ lwp-install:: FORCE
 
 # Dependencies
 
+perl-File-Listing-srpm:: perl-HTTP-Date-srpm
+
+perl-HTTP-Message-srpm:: perl-Encode-Locale-srpm
+perl-HTTP-Message-srpm:: perl-HTTP-Date-srpm
+perl-HTTP-Message-srpm:: perl-IO-HTML-srpm
+perl-HTTP-Message-srpm:: perl-LWP-MediaTypes-srpm
+
+perl-HTTP-Cookies-srpm:: perl-HTTP-Date-srpm
+
+perl-HTTP-Daemon-srpm:: perl-HTTP-Date-srpm
+perl-HTTP-Daemon-srpm:: perl-LWP-MediaTypes-srpm
+
+perl-HTTP-Cookies-srpm:: perl-HTTP-Date-srpm
+perl-HTTP-Cookies-srpm:: perl-HTTP-Message-srpm
+
+perl-IO-Socket-SSL-srpm:: perl-Net-SSLeay-srpm
+
+perl-HTTP-Negotiatiate-srpm:: perl-HTTP-Message-srpm
+
+perl-Net-HTTP-srpm:: perl-IO-Socket-SSL-srpm
+
+perl-HTML-Form-srpm:: perl-libwww-perl-srpm
+
 lwp:: perl-Data-Dump-srpm
 lwp:: perl-Encode-Locale-srpm
 lwp:: perl-File-Listing-srpm
@@ -86,10 +113,16 @@ lwp:: perl-HTTP-Date-srpm
 lwp:: perl-HTTP-Message-srpm
 lwp:: perl-HTTP-Negotiatiate-srpm
 lwp:: perl-IO-HTML-srpm
-lwp:: perl-libwww-perl-srpm
+lwp:: perl-IO-Socket-SSL-srpm
 lwp:: perl-LWP-MediaTypes-srpm
 lwp:: perl-Net-HTTP-srpm
+lwp:: perl-Net-SSLeay-srpm
 lwp:: perl-WWW-RobotRules-srpm
+# Core component
+lwp:: perl-libwww-perl-srpm
+# Required for perl-libwww-perl installation
+lwp:: perl-HTML-Form-srpm
+
 
 # Git clone operations, not normally required
 # Targets may change
