@@ -1,85 +1,49 @@
 Name:           perl-libwww-perl
-Version:        6.06
-#Release:        2%{?dist}
+Version:        6.05
+#Release:        3%{?dist}
 Release:        0.1%{?dist}
 Summary:        A Perl interface to the World-Wide Web
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 URL:            http://search.cpan.org/dist/libwww-perl/
-Source0:        http://www.cpan.org/authors/id/M/MS/MSCHILLI/libwww-perl-%{version}.tar.gz
-# Run tests against localhost, CPAN RT#94959
-Patch0:         libwww-perl-6.06-Connect-to-localhost-instead-of-hostname.patch
+Source0:        http://www.cpan.org/authors/id/G/GA/GAAS/libwww-perl-%{version}.tar.gz
 BuildArch:      noarch
-BuildRequires:  perl
-BuildRequires:  perl(ExtUtils::MakeMaker)
-BuildRequires:  perl(File::Copy)
-BuildRequires:  perl(Getopt::Long)
-BuildRequires:  perl(IO::Socket)
-BuildRequires:  perl(IO::Select)
-BuildRequires:  perl(strict)
-BuildRequires:  perl(Sys::Hostname)
-
-# Run-time:
-# Authen::NTLM 1.02 not used at tests
-BuildRequires:  perl(base)
-BuildRequires:  perl(Carp)
 BuildRequires:  perl(Digest::MD5)
 BuildRequires:  perl(Encode) >= 2.12
 BuildRequires:  perl(Encode::Locale)
 BuildRequires:  perl(Exporter)
-# Fcntl not used at tests
-# File::Listing 6 not used at tests
-# File::Spec not used at tests
-# Getopt::Std not used at tests
+BuildRequires:  perl(File::Listing) >= 6
+BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(HTML::Entities)
 BuildRequires:  perl(HTML::HeadParser)
-BuildRequires:  perl(HTTP::Config)
-# HTTP::Cookies 6 not used at tests
+BuildRequires:  perl(HTTP::Cookies) >= 6
+BuildRequires:  perl(HTTP::Daemon) >= 6
 BuildRequires:  perl(HTTP::Date) >= 6
-# HTTP::GHTTP not used at tests
-BuildRequires:  perl(HTTP::Headers::Util)
-# HTTP::Negotiate 6 not used at tests
+BuildRequires:  perl(HTTP::Negotiate) >= 6
 BuildRequires:  perl(HTTP::Request) >= 6
 BuildRequires:  perl(HTTP::Request::Common) >= 6
 BuildRequires:  perl(HTTP::Response) >= 6
 BuildRequires:  perl(HTTP::Status) >= 6
-# integer not used at tests
+BuildRequires:  perl(IO::Select)
+BuildRequires:  perl(IO::Socket)
 BuildRequires:  perl(LWP::MediaTypes) >= 6
-# Mail::Internet not needed
 BuildRequires:  perl(MIME::Base64) >= 2.1
-# Net::FTP 2.58 not used at tests
+BuildRequires:  perl(Net::FTP) >= 2.58
 BuildRequires:  perl(Net::HTTP) >= 6.04
-# Net::NNTP not used at tests
-# URI 1.10 not used at tests
+BuildRequires:  perl(URI) >= 1.10
 BuildRequires:  perl(URI::Escape)
-# URI::Heuristic not used at tests
-BuildRequires:  perl(vars)
 BuildRequires:  perl(WWW::RobotRules) >= 6
-# Optional run-time:
-# Cpan::Config not used at tests
-# HTML::Parse not used at tests
-
 # Tests only:
 BuildRequires:  perl(Config)
-# File::Path not used
-BuildRequires:  perl(HTTP::Daemon) >= 6
-BuildRequires:  perl(Test)
-# TAP::Harness not used
 BuildRequires:  perl(Test::More)
-
 Requires:       perl(:MODULE_COMPAT_%(eval "`perl -V:version`"; echo $version))
-Requires:       perl(Authen::NTLM) >= 1.02
 Requires:       perl(Encode) >= 2.12
-Requires:       perl(File::Spec)
 Requires:       perl(File::Listing) >= 6
-# Do not require HTML::FormatPS
-# Do not require HTML::FormatText
 Requires:       perl(HTML::Entities)
 Requires:       perl(HTML::HeadParser)
-Requires:       perl(HTTP::Config)
 Requires:       perl(HTTP::Cookies) >= 6
+Requires:       perl(HTTP::Daemon) >= 6
 Requires:       perl(HTTP::Date) >= 6
-Requires:       perl(HTTP::Headers::Util)
 Requires:       perl(HTTP::Negotiate) >= 6
 Requires:       perl(HTTP::Request) >= 6
 Requires:       perl(HTTP::Request::Common) >= 6
@@ -101,11 +65,9 @@ write WWW clients. The library also contain modules that are of more general
 use and even classes that help you implement simple HTTP servers.
 
 # Remove not-packaged features
-%global __requires_exclude %{?__requires_exclude:%__requires_exclude|}perl\\(HTTP::GHTTP\\)
-# Get the syntax to work on RHEL 6
-%global __requires_exclude %__requires_exclude|}perl\\(HTTP::GHTTP\\)$
+%global __requires_exclude %{?__requires_exclude:%__requires_exclude|}perl\\(Authen::NTLM\\)
+%global __requires_exclude %__requires_exclude|perl\\(HTTP::GHTTP\\)\\s*$
 # Remove underspecified dependencies
-%global __requires_exclude %__requires_exclude|^perl\\(Authen::NTLM\\)\\s*$
 %global __requires_exclude %__requires_exclude|^perl\\(Encode\\)\\s*$
 %global __requires_exclude %__requires_exclude|^perl\\(File::Listing\\)\\s*$
 %global __requires_exclude %__requires_exclude|^perl\\(HTTP::Date\\)\\s*$
@@ -121,7 +83,11 @@ use and even classes that help you implement simple HTTP servers.
 
 %prep
 %setup -q -n libwww-perl-%{version} 
-%patch0 -p1
+
+# Disable GHTTP, it hasn't worked in five years and makes for nutty
+# dependency exclusions
+rm -f lib/LWP/Protocol/GHTTP.pm 
+sed -i.bak /GHTTP/d MANIFEST
 
 %build
 # Install the aliases by default
@@ -147,16 +113,9 @@ make test
 %{_mandir}/man3/*.3*
 
 %changelog
-* Sun Jun 15 2014 Nico Kadel-Garcia <nkadel@gmail.com>
-- Backport to RHEL 6, with release rolled back to 0.1
-- Add spare GHTTP::HTTP exluseion to enforce operation with RHEL 6
-
-* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 6.06-2
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
-
-* Wed Apr 23 2014 Petr Pisar <ppisar@redhat.com> - 6.06-1
-- 6.06 bump
-- Run tests against localhost (CPAN RT#94959)
+* Mon Jun 16 2014 Nico Kadek-Garcia <nkadel@gmail.com>
+- perl(HTTP::GHTTP) exclusions were not working, siply delete and disable
+  lib/LWP/Protocol/GHTTP.om, it's a Gnome hack unused in 5 years.
 
 * Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 6.05-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
@@ -246,7 +205,7 @@ make test
 * Thu Jan 22 2009 Marcela Mašláňová <mmaslano@redhat.com> 5.823-1
 - update to 5.823
 
-* Mon Oct 13 2008 Marcela Mašláňová <mmaslano@redhat.com> 5.817-1
+* Mon Oct 10 2008 Marcela Mašláňová <mmaslano@redhat.com> 5.817-1
 - update to 5.817
 
 * Tue Oct  7 2008 Marcela Mašláňová <mmaslano@redhat.com> 5.816-1
@@ -295,7 +254,7 @@ make test
 * Fri Feb 03 2006 Jason Vas Dias <jvdias@redhat.com> - 5.805-1.1
 - rebuild for new perl-5.8.8
 
-* Mon Dec 19 2005 Jason Vas Dias<jvdias@redhat.com> - 5.805-1
+* Mon Dec 18 2005 Jason Vas Dias<jvdias@redhat.com> - 5.805-1
 - Upgrade to 5.805-1
 
 * Fri Dec 16 2005 Jesse Keating <jkeating@redhat.com>
