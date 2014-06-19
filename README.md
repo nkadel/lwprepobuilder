@@ -2,7 +2,9 @@ lwprepobuilder - perl-libwww-perl version 6 RPM and SRPM building toolki8t
 
 License:  GPLv3
 	  (Except where noted in subpackages)
+
 Maintainer:   Nico Kadel-Garcia
+
 Maintainer Email: nkadel@gmail.com
 
 Usage:
